@@ -1,0 +1,34 @@
+name: CI
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight
+  push:
+    branches:
+      - master
+
+jobs:
+  update-episode:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install random
+
+    - name: Run script
+      run: python generate_episode.py
+
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git add episode_of_the_day.json
+        git commit -m 'Update episode of the day'
+        git push
