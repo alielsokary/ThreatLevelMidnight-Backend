@@ -1,4 +1,5 @@
 name: CI
+
 on:
   schedule:
     - cron: '0 0 * * *'  # Runs daily at midnight
@@ -19,11 +20,8 @@ jobs:
       with:
         python-version: '3.x'
 
-    - name: Install dependencies
-      run: pip install random
-
     - name: Run script
-      run: python generate_episode.py
+      run: python eod.py
 
     - name: Commit and push changes
       run: |
