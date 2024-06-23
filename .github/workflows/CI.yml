@@ -2,7 +2,7 @@ name: CI
 
 on:
   schedule:
-    - cron: '00 21 * * *'  # Runs daily at midnight UTC+3
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
   push:
     branches:
       - master
